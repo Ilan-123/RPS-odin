@@ -7,6 +7,13 @@ let computerScore = 0;
 let humanChoice;
 let round=0;
 
+const btnR = document.querySelector("#R");
+const btnP = document.querySelector("#P");
+const btnS = document.querySelector("#S");
+btnR.addEventListener("click", playRound(document.getElementById("R").value,getComputerChoice));
+btnP.addEventListener("click", playRound(document.getElementById("P").value,getComputerChoice));
+btnS.addEventListener("click", playRound(document.getElementById("S").value,getComputerChoice));
+
 function getComputerChoice(){
     let RandomNumber = Math.round(Math.random()*9)
     
@@ -19,13 +26,6 @@ function getComputerChoice(){
     else if(RandomNumber<9){
         return "Scissors"
     }
-}
-
-
-
-function getHumanChoice(humanChoice){
-    return humanChoice = prompt("what is your choice?", "that is not a choice here")
-    
 }
 
 function playRound(humanChoice,computerChoice){
@@ -65,25 +65,19 @@ function playRound(humanChoice,computerChoice){
     if (h==c){
         alert("draw!")
     }
-    }else()=>{
+    }else{
         alert("chose a viable answer") 
     }
     console.log(HumanScore);
     console.log(computerScore);
     round++
-    
     if(round<=5){
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
-    }else()=>{
+    }else{
         return
     }
 }
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
 alert("your score:"+HumanScore.toString() + "/"+ "CPU score:"+computerScore.toString())
 alert("end of game")

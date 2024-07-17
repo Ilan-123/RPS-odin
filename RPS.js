@@ -1,18 +1,16 @@
 console.log("Hello World!");
 
-let CPUchoice;
-let GUYchoice;
 let HumanScore = 0;
 let computerScore = 0;
 let humanChoice;
-let round=0;
+let scoreboard = document.getElementById("scoreboard").textContent;
 
 const btnR = document.querySelector("#R");
 const btnP = document.querySelector("#P");
 const btnS = document.querySelector("#S");
-btnR.addEventListener("click", playRound(document.getElementById("R").value,getComputerChoice));
-btnP.addEventListener("click", playRound(document.getElementById("P").value,getComputerChoice));
-btnS.addEventListener("click", playRound(document.getElementById("S").value,getComputerChoice));
+btnR.addEventListener("click", () => playRound(document.getElementById("R").value,getComputerChoice()));
+btnP.addEventListener("click", () => playRound(document.getElementById("P").value,getComputerChoice()));
+btnS.addEventListener("click", () => playRound(document.getElementById("S").value,getComputerChoice()));
 
 function getComputerChoice(){
     let RandomNumber = Math.round(Math.random()*9)
@@ -37,47 +35,50 @@ function playRound(humanChoice,computerChoice){
     if(h == "STOP"){
         return}
     let c = computerChoice.toUpperCase();
-    console.log(h);
+    console.log({h,c});
 
     if ( h == "ROCK" && c == "PAPER"){ 
         computerScore++
         
     }
-    if ( h == "ROCK" && c == "SCISSORS"){ 
+    else if ( h == "ROCK" && c == "SCISSORS"){ 
         HumanScore++
         
     }
-    if ( h == "PAPER" && c == "ROCK"){ 
+    else if ( h == "PAPER" && c == "ROCK"){ 
         HumanScore++
         
     }
-    if ( h == "PAPER" && c == "SCISSORS"){ 
+    else if ( h == "PAPER" && c == "SCISSORS"){ 
         computerScore++
         
     }
-    if ( h == "SCISSORS" && c == "ROCK"){ 
+    else if ( h == "SCISSORS" && c == "ROCK"){ 
         computerScore++
         
     }
-    if ( h == "SCISSORS" && c == "PAPER"){ 
+    else if ( h == "SCISSORS" && c == "PAPER"){ 
         HumanScore++
-     
-    if (h==c){
+    }
+    else if (h==c){
         alert("draw!")
     }
-    }else{
+    else{
         alert("chose a viable answer") 
     }
     console.log(HumanScore);
     console.log(computerScore);
-    round++
-    if(round<=5){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }else{
+    document.getElementById("scoreboard").textContent = "Human Score " + HumanScore + "/CPU" + computerScore;
+    if(HumanScore+computerScore>5){
+        alert("your score:"+HumanScore.toString() + "/"+ "CPU score:"+computerScore.toString())
+        if(HumanScore<computerScore){
+            alert("YOU LOOSE")
+        }
+        else{ alert("YOU WIN")}
+        alert("end of game")
+        HumanScore = 0;
+        computerScore = 0;
+        document.getElementById("scoreboard").textContent = "Human Score " + HumanScore + "/CPU" + computerScore;
         return
     }
 }
-alert("your score:"+HumanScore.toString() + "/"+ "CPU score:"+computerScore.toString())
-alert("end of game")
